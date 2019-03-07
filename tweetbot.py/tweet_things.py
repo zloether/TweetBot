@@ -11,7 +11,7 @@ import time
 # -----------------------------------------------------------------------------
 # variables
 # -----------------------------------------------------------------------------
-list_file = 'things_to_tweet.txt' # list of things to tweet
+list_file = 'config/things_to_tweet.txt' # list of things to tweet
 sleep_delay = False
 delay_min = 1800
 delay_max = 3600
