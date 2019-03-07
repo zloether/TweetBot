@@ -30,11 +30,11 @@ Edit the `tweetthings_config.py` file and insert your API credentials for these 
 - *oauth_token*
 - *oauth_token_secret*
 
-<br>
+
 The `things_to_tweet.txt` files contains a newline seperated list of  things to tweet. Whenever `tweetthings.py` runs, it will read this file. When its time to tweet something, it will pick a line at random from this file and tweet that line.
 
 
-<br>
+
 Three scripts use boolean values to control if they write to the API. Toggle them between `True` and `False` to enable or disable, respectively, writing to the API.
 - `tweet_things.py`
 - `tweet_replies.py`
