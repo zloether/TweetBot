@@ -102,3 +102,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# tweetbot.py files
+logs/
+anchor.txt
+limits.txt
+requested_friends.txt
