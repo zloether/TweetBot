@@ -7,7 +7,7 @@ A Twitter bot written in Python
 ## Table of Contents
 - [Getting Started](#getting-started)
 - [Prerequisites](#prerequisites)
-- [Installing](#installing)
+- [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#Usage)
 	- [Windows](#windows)
@@ -30,7 +30,7 @@ After Python is installed, install the *requests* and *requests_oauthlib* librar
 pip install requests requests_oauthlib
 ```
 
-## Installing
+## Installation
 Download the latest version from GitHub using Git.
 ```
 git clone https://github.com/zloether/tweetbot.py.git
