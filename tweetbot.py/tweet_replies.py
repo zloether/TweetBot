@@ -16,7 +16,7 @@ import time
 # -----------------------------------------------------------------------------
 tweet_replies = False # False for testing, True to actually tweet replies
 count = None # get default number of tweets per connection
-list_file = 'things_to_tweet.txt'
+list_file = 'config/things_to_tweet.txt'
 anchor_file = 'anchor.txt'
 update_friends = True # check for new followers and add them as friends
 
