@@ -8,7 +8,7 @@
 from requests_oauthlib import OAuth1Session
 from requests import Request
 from urllib.parse import quote
-from tweetthings_config import *
+from tweet_config import tweet_config
 import datetime
 import time
 
@@ -22,11 +22,13 @@ debug = False
 # twitter_connector
 # -----------------------------------------------------------------------------
 class twitter_connector():
-    def __init__ (self):
-        self.twitter = OAuth1Session(client_key=oauth_consumer_key, \
-                                    client_secret=oauth_consumer_secret, \
-                                    resource_owner_key=oauth_token, \
-                                    resource_owner_secret=oauth_token_secret)
+    def __init__ (self, tweet_config):
+        self.tweet_config = tweet_config
+        api_cred = self.tweet_config.get_api_creds()
+        self.twitter = OAuth1Session(client_key=api_cred[0], \
+                                    client_secret=api_cred[1], \
+                                    resource_owner_key=api_cred[2], \
+                                    resource_owner_secret=api_cred[3])
         self.request_counter = []
         self.sleep_delay = sleep_delay
         self.last_call = None

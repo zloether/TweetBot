@@ -6,6 +6,7 @@
 # -----------------------------------------------------------------------------
 from twitter_connector import twitter_connector
 from twitter_followers import twitter_followers
+from twitter_config import twitter_config
 from random import randint
 import json
 import time
@@ -117,8 +118,11 @@ if __name__ == '__main__':
     print('Start time: ' + time.strftime("%Y-%m-%d %H:%M:%S"))
     print('Tweet replies: ' + str(tweet_replies))
 
+    # set up tweet_config object
+    twitter_config = tweet_config()
+
     # create Twitter connector object
-    t = twitter_connector()
+    t = twitter_connector(twitter_config)
     tweet_replies(t)
 
     print('End time: ' + time.strftime("%Y-%m-%d %H:%M:%S"))
