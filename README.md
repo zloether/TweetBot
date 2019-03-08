@@ -40,7 +40,7 @@ This will create a directory called *tweetbot.py* and all the code will be in it
 ## Configuration
 You need a Twitter developer account in order to connect to the API. Get started [here](https://developer.twitter.com/en.html).
 
-Edit the `tweetthings_config.py` file and insert your API credentials for these values:
+Edit the `config/tweet_config.ini` file and insert your API credentials for these values:
 
 - *oauth_consumer_key*
 - *oauth_consumer_secret*
@@ -48,28 +48,28 @@ Edit the `tweetthings_config.py` file and insert your API credentials for these 
 - *oauth_token_secret*
 
 
-The `things_to_tweet.txt` files contains a newline seperated list of  things to tweet. Whenever `tweetthings.py` runs, it will read this file. When its time to tweet something, it will pick a line at random from this file and tweet that line.
+The `config/things_to_tweet.txt` file contains a newline seperated list of things to tweet. Whenever `tweetbot.py` runs, it will read this file. When its time to tweet something, it will pick a line at random from this file and tweet that line.
 
 
 
 Three scripts use boolean values to control if they write to the API. Toggle them between `True` and `False` to enable or disable, respectively, writing to the API.
-- `tweet_things.py`
-- `tweet_replies.py`
-- `twitter_followers.py`
+- `tweetbot.py/tweet_things.py`
+- `tweetbot.py/tweet_replies.py`
+- `tweetbot.py/twitter_followers.py`
 
 ## Usage
 ### **_Windows_**
 
-The `run_main.bat` script will call the `tweet_things.py` script and store output to the log file.
+The `run_main.bat` script will call the `tweetbot.py/tweet_things.py` script and store output to the log file.
 
-The `run_replies.bat` script will call the `tweet_replies.py` script and store output to the log file.
+The `run_replies.bat` script will call the `tweetboty.py/tweet_replies.py` script and store output to the log file.
 
 
 ### **_Linux_**
 
-The `run_main.sh` script will call the `tweet_things.py` script and store output to the log file.
+The `run_main.sh` script will call the `tweetboy.py/tweet_things.py` script and store output to the log file.
 
-The `run_replies.sh` script will call the `tweet_replies.py` script and store output to the log file.
+The `run_replies.sh` script will call the `tweetbot.py/tweet_replies.py` script and store output to the log file.
 
 
 ## Logging
