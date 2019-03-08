@@ -5,6 +5,7 @@
 # imports
 # -----------------------------------------------------------------------------
 from twitter_connector import twitter_connector
+from tweet_config import tweet_config
 from random import randint
 import time
 
@@ -29,6 +30,9 @@ check_already_requested = True # for future use
 # -----------------------------------------------------------------------------
 class tweet_things(object):
     def __init__(self):
+        # set up tweet_config object
+        self.twitter_config = tweet_config()
+
         # open list of things to tweet file
         print('list_file=' + str(list_file))
         self.list_of_things_to_tweet = []
@@ -41,7 +45,7 @@ class tweet_things(object):
             exit()
 
         # instantiate Twitter Connector Object
-        self.t = twitter_connector()
+        self.t = twitter_connector(self.twitter_config)
 
     # -------------------------------------------------------------------------
     # random delay
