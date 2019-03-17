@@ -15,10 +15,10 @@ import time
 # -----------------------------------------------------------------------------
 # settings
 # -----------------------------------------------------------------------------
-tweet_replies = False # False for testing, True to actually tweet replies
+send_replies = False # False for testing, True to actually tweet replies
 count = None # get default number of tweets per connection
 list_file = 'config/things_to_tweet.txt'
-anchor_file = 'anchor.txt'
+anchor_file = 'config/anchor.txt'
 update_friends = True # check for new followers and add them as friends
 
 def tweet_replies(twitter_connector):
@@ -97,7 +97,7 @@ def tweet_replies(twitter_connector):
                         'Tweet ID: ' + str(tweet_id) + '; ' +\
                         'Screen name: ' + screen_name + '; ' +\
                         'Status: ' + str(status))
-                if tweet_replies:
+                if send_replies:
                     r = t.statuses_reply(status, tweet_id)
                     print(r)
                 else:
@@ -122,7 +122,7 @@ def tweet_replies(twitter_connector):
 
 if __name__ == '__main__':
     print('Start time: ' + time.strftime("%Y-%m-%d %H:%M:%S"))
-    print('Tweet replies: ' + str(tweet_replies))
+    print('Tweet replies: ' + str(send_replies))
 
     # set up tweet_config object
     twitter_config = tweet_config()
