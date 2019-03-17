@@ -6,6 +6,7 @@
 # imports
 # -----------------------------------------------------------------------------
 import configparser
+import argparse
 from os import path
 
 
@@ -25,8 +26,38 @@ config_file = app_path + '/config/tweet_config.ini'
 # -----------------------------------------------------------------------------
 class tweet_config():
     def __init__(self, config_file=config_file):
+        # parse arguments
+        self.args = self.parse_arguments()
+        
+        # set up config parser
         self.config = configparser.ConfigParser()
-        self.config.read(config_file)
+        
+        # give priority to config file passed as arugment
+        if self.args.config:
+            self.config.read(self.args.config)
+        else:
+            self.config.read(config_file)
+
+
+    
+    def parse_arguments(self):
+        # create parser object
+        parser = argparse.ArgumentParser(description='A Twitter bot')
+
+        # setup arugment for specifying a config file to use
+        parser.add_argument('-c', '--config', dest='config', metavar='file',
+                            action='store', help='specify config file to use')
+        
+        # setup arugment for specifying a list of things to tweet
+        parser.add_argument('-l', '--list', dest='list', metavar='file',
+                            action='store', help='specify list of things to tweet')
+        
+        # parse the arguments
+        args = parser.parse_args()
+        
+        return args
+
+
         
     
     def get_api_creds(self):
@@ -34,7 +65,14 @@ class tweet_config():
         oauth_consumer_secret = self.config['API_KEYS']['oauth_consumer_secret']
         oauth_token = self.config['API_KEYS']['oauth_token']
         oauth_token_secret = self.config['API_KEYS']['oauth_token_secret']
-        print(oauth_consumer_key, oauth_consumer_secret, oauth_token, oauth_token_secret)
+        return oauth_consumer_key, oauth_consumer_secret, oauth_token, oauth_token_secret
+    
+
+
+    def get_list_file(self):
+        list_file = self.config['LIST']['list']
+        return list_file
+
 
 
 
