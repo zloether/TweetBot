@@ -1,6 +1,7 @@
 # tweetbot.py
-![GitHub](https://img.shields.io/github/license/zloether/tweetbot.py.svg)
-![Python](https://img.shields.io/badge/python-v3.5+-blue.svg)
+[![Python](https://img.shields.io/badge/python-v3.5+-blue.svg)](https://www.python.org/)
+[![Issues](https://img.shields.io/github/issues/zloether/tweetbot.py.svg)](https://github.com/zloether/tweetbot.py/issues)
+[![License](https://img.shields.io/github/license/zloether/tweetbot.py.svg)](https://opensource.org/licenses/MIT)
 
 A Twitter bot written in Python
 

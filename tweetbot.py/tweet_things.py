@@ -34,14 +34,15 @@ class tweet_things(object):
         self.twitter_config = tweet_config()
 
         # open list of things to tweet file
-        print('list_file=' + str(list_file))
+        self.list_file = self.twitter_config.get_list_file()
+        print('list_file: ' + str(self.list_file))
         self.list_of_things_to_tweet = []
         try:
-            with open(list_file) as f:
+            with open(self.list_file) as f:
                 for line in f:
                     self.list_of_things_to_tweet.append(line.strip())
         except FileNotFoundError:
-            print(str(list_file) + ' not found! Exiting!')
+            print(str(self.list_file) + ' not found! Exiting!')
             exit()
 
         # instantiate Twitter Connector Object
@@ -64,7 +65,16 @@ class tweet_things(object):
     # -------------------------------------------------------------------------
     def tweet_something(self):
         print('Tweeting something')
-        random_value = randint(0, len(self.list_of_things_to_tweet)-1)
+        try:
+            random_value = randint(0, len(self.list_of_things_to_tweet)-1)
+        except ValueError:
+            print('Error: List of things to tweet is empty.')
+            print('List file: ' + str(self.list_file))
+            print('Exiting!')
+            exit()
+            #*********************************************************************************
+            # add: output list of things when this fails
+            #*********************************************************************************
         status = self.list_of_things_to_tweet[random_value]
         print('Status: ' + str(status))
         if tweet_things:
@@ -83,7 +93,7 @@ class tweet_things(object):
 
 if __name__ == '__main__':
     print('Start time: ' + time.strftime("%Y-%m-%d %H:%M:%S"))
-    print('Tweet things: ' + str(tweet_things))
+    #print('Tweet things: ' + str(tweet_things))
 
     # instantiate tweet_things object
     twt = tweet_things()
