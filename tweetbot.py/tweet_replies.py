@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 from twitter_connector import twitter_connector
 from twitter_followers import twitter_followers
-from twitter_config import twitter_config
+from tweet_config import tweet_config
 from random import randint
 import json
 import time
@@ -22,20 +22,26 @@ anchor_file = 'anchor.txt'
 update_friends = True # check for new followers and add them as friends
 
 def tweet_replies(twitter_connector):
-
-    print('list_file=' + str(list_file))
     print('anchor_file=' + str(anchor_file))
+
+    # -------------------------------------------------------------------------
+    # set up tweet_config object
+    # -------------------------------------------------------------------------
+    twitter_config = tweet_config()
+
 
     # -------------------------------------------------------------------------
     # open the things to tweet file
     # -------------------------------------------------------------------------
+    list_file = twitter_config.get_list_file()
+    print('list_file: ' + str(list_file))
     list_of_things_to_tweet = []
     try:
         with open(list_file) as f:
             for line in f:
                 list_of_things_to_tweet.append(line.strip())
     except FileNotFoundError:
-        print('***ERROR*** ' + str(list_file) + ' not found! Exiting!')
+        print(str(list_file) + ' not found! Exiting!')
         exit()
 
     # -------------------------------------------------------------------------
@@ -54,7 +60,7 @@ def tweet_replies(twitter_connector):
     # -------------------------------------------------------------------------
     # create Twitter connector object
     # -------------------------------------------------------------------------
-    t = twitter_connector
+    t = twitter_connector #********************************************************* variable passed into this function is getting renamed. FIX THIS!!
 
     # -------------------------------------------------------------------------
     # check for new followers and add them as friends
