@@ -19,15 +19,13 @@ config_file = app_path + '/config/tweet_config.ini'
 
 
 
-
-
 # -----------------------------------------------------------------------------
 # set up tweet_config class
 # -----------------------------------------------------------------------------
 class tweet_config():
     def __init__(self, config_file=config_file):
         # parse arguments
-        self.args = self.parse_arguments()
+        self.parse_arguments()
         
         # set up config parser
         self.config = configparser.ConfigParser()
@@ -42,21 +40,18 @@ class tweet_config():
     
     def parse_arguments(self):
         # create parser object
-        parser = argparse.ArgumentParser(description='A Twitter bot')
+        self.parser = argparse.ArgumentParser(description='A Twitter bot')
 
         # setup arugment for specifying a config file to use
-        parser.add_argument('-c', '--config', dest='config', metavar='file',
+        self.parser.add_argument('-c', '--config', dest='config', metavar='file',
                             action='store', help='specify config file to use')
         
         # setup arugment for specifying a list of things to tweet
-        parser.add_argument('-l', '--list', dest='list', metavar='file',
+        self.parser.add_argument('-l', '--list', dest='list', metavar='file',
                             action='store', help='specify list of things to tweet')
         
         # parse the arguments
-        args = parser.parse_args()
-        
-        return args
-
+        self.args = self.parser.parse_args()
 
         
     
