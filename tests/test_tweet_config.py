@@ -16,8 +16,13 @@ def test_tweet_config_init():
 
 
 def test_get_api_creds():
+    # set test config file to use
     test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
+
+    # get api creds
     creds = tc.get_api_creds()
     
     assert creds[0] == 'test_oauth_consumer_key'
@@ -28,9 +33,13 @@ def test_get_api_creds():
 
 
 def test_get_list_file():
+    # set test config file to use
     test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
 
+    # test list file to check against
     test_list_file = 'test/test_files/test_list.txt'
 
     assert tc.get_list_file() == test_list_file
