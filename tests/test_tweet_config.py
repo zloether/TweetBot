@@ -4,41 +4,25 @@ import sys
 import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from tweetbot import tweet_config
-from argparse import ArgumentParser
 
 
 
-def test_parse_arguments():
-    test_config_file = 'tests/test_files/test_config.ini'
-    tc = tweet_config.tweet_config(config_file=test_config_file)
-
-    assert isinstance(tc.parser, ArgumentParser)
-
-
-
-def test_argument_config():
+def test_tweet_config_init():
+    # create tweet_config object
     tc = tweet_config.tweet_config()
 
-    test_config_file = 'tests/test_files/test_config.ini'
-    tc.args = tc.parser.parse_args(['--config', test_config_file])
-    
-    assert tc.args.config == test_config_file
-
-
-
-def test_argument_list():
-    tc = tweet_config.tweet_config()
-
-    test_list_file = 'test/test_files/test_list.txt'
-    tc.args = tc.parser.parse_args(['--list', test_list_file])
-    
-    assert tc.args.list == test_list_file
+    assert isinstance(tc, tweet_config.tweet_config)
 
 
 
 def test_get_api_creds():
+    # set test config file to use
     test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
+
+    # get api creds
     creds = tc.get_api_creds()
     
     assert creds[0] == 'test_oauth_consumer_key'
@@ -49,9 +33,13 @@ def test_get_api_creds():
 
 
 def test_get_list_file():
+    # set test config file to use
     test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
 
+    # test list file to check against
     test_list_file = 'test/test_files/test_list.txt'
 
     assert tc.get_list_file() == test_list_file
