@@ -46,7 +46,7 @@ class tweet_things(object):
             exit()
 
         # instantiate Twitter Connector Object
-        self.t = twitter_connector(self.twitter_config)
+        self.tc = twitter_connector(self.twitter_config)
 
     # -------------------------------------------------------------------------
     # random delay
@@ -72,13 +72,10 @@ class tweet_things(object):
             print('List file: ' + str(self.list_file))
             print('Exiting!')
             exit()
-            #*********************************************************************************
-            # add: output list of things when this fails
-            #*********************************************************************************
         status = self.list_of_things_to_tweet[random_value]
         print('Status: ' + str(status))
         if tweet_things:
-            r = self.t.statuses_update(status)
+            r = self.tc.statuses_update(status)
             print(r)
 
     # -------------------------------------------------------------------------
@@ -87,7 +84,7 @@ class tweet_things(object):
     def check_limit(self, resources):
         print('Checking limit')
         if check_status_limit:
-            self.t.application_rate_limit_status(resources)
+            self.tc.application_rate_limit_status(resources)
 
 
 

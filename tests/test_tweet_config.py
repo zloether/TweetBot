@@ -4,7 +4,7 @@ import sys
 import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 from tweetbot import tweet_config
-
+from argparse import ArgumentParser
 
 
 def test_tweet_config_init():
@@ -33,13 +33,20 @@ def test_get_api_creds():
 
 
 def test_get_list_file():
-    # set test config file to use
-    test_config_file = 'tests/test_files/test_config.ini'
-
     # create tweet_config object
-    tc = tweet_config.tweet_config(config_file=test_config_file)
+    tc = tweet_config.tweet_config()
 
     # test list file to check against
+    default_list_file = 'config/things_to_tweet.txt'
+
+    # test default list file
+    assert tc.get_list_file() == default_list_file
+
+    # test list file to use
     test_list_file = 'test/test_files/test_list.txt'
 
+    # try --list argument
+    tc.args = tc.parser.parse_args(['--list', test_list_file])
+
     assert tc.get_list_file() == test_list_file
+    
