@@ -27,9 +27,9 @@ def test_get_help(capsys):
     tc.parser.print_help()
 
     # capture stdout
-    captured = capsys.readouterr()
+    out = capsys.readouterr()[0]
 
-    assert captured.out.startswith('usage: ')
+    assert out.startswith('usage: ')
 
 
 
