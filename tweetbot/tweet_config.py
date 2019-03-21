@@ -65,8 +65,10 @@ class tweet_config():
 
 
     def get_list_file(self):
-        list_file = self.config['LIST']['list']
-        return list_file
+        if self.args.list:
+            return self.args.list
+        else:
+            return self.config['LIST']['list']
 
 
 

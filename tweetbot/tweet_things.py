@@ -72,9 +72,6 @@ class tweet_things(object):
             print('List file: ' + str(self.list_file))
             print('Exiting!')
             exit()
-            #*********************************************************************************
-            # add: output list of things when this fails
-            #*********************************************************************************
         status = self.list_of_things_to_tweet[random_value]
         print('Status: ' + str(status))
         if tweet_things:
