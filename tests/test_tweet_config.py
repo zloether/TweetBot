@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.
 from tweetbot import tweet_config
 
 
-
 def test_tweet_config_init():
     # create tweet_config object
     tc = tweet_config.tweet_config()
