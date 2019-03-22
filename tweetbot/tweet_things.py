@@ -53,12 +53,12 @@ class tweet_things(object):
     # random delay
     # -------------------------------------------------------------------------
     def random_delay(self):
-        random_time = randint(self.delay_min, self.delay_max)
+        self. random_time = randint(self.delay_min, self.delay_max)
         if self.sleep_delay:
-            print('Sleeping for ' + str(random_time) + 'seconds')
-            time.sleep(random_time)
+            print('Sleeping for ' + str(self.random_time) + 'seconds')
+            time.sleep(self.random_time)
         else:
-            print('sleep_delay=' + str(random_time))
+            print('sleep_delay=' + str(self.random_time))
 
 
     # -------------------------------------------------------------------------

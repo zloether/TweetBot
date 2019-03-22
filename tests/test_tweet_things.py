@@ -29,5 +29,7 @@ def test_random_delay(mocked_time):
     # call random_delay
     twt.random_delay()
 
-    mocked_time.sleep.assert_called_once()
+    mocked_time.sleep.assert_called_with(twt.random_time)
+    assert twt.random_time > twt.delay_min
+    assert twt.random_time < twt.delay_max
 
