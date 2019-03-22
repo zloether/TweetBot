@@ -12,10 +12,7 @@ import time
 # -----------------------------------------------------------------------------
 # variables
 # -----------------------------------------------------------------------------
-list_file = 'config/things_to_tweet.txt' # list of things to tweet
-sleep_delay = False
-delay_min = 1800
-delay_max = 3600
+
 debug = False # print extra logging info
 tweet_things = False # False for testing, True to actually tweet things
 check_status_limit = True
@@ -30,6 +27,10 @@ check_already_requested = True # for future use
 # -----------------------------------------------------------------------------
 class tweet_things(object):
     def __init__(self):
+        self.sleep_delay = False
+        self.delay_min = 1800
+        self.delay_max = 3600
+
         # set up tweet_config object
         self.twitter_config = tweet_config()
 
@@ -52,12 +53,12 @@ class tweet_things(object):
     # random delay
     # -------------------------------------------------------------------------
     def random_delay(self):
-        random_delay = randint(delay_min, delay_max)
-        if sleep_delay:
-            print('Sleeping for ' + str(random_delay) + 'seconds')
-            time.sleep(random_delay)
+        self. random_time = randint(self.delay_min, self.delay_max)
+        if self.sleep_delay:
+            print('Sleeping for ' + str(self.random_time) + 'seconds')
+            time.sleep(self.random_time)
         else:
-            print('sleep_delay=' + str(sleep_delay))
+            print('sleep_delay=' + str(self.random_time))
 
 
     # -------------------------------------------------------------------------
