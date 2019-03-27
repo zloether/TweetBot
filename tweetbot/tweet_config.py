@@ -50,6 +50,19 @@ class tweet_config():
         self.parser.add_argument('-l', '--list', dest='list', metavar='file',
                             action='store', help='specify list of things to tweet')
         
+        # setup arugment to explicitly enable tweeting
+        self.parser.add_argument('-t', '--tweet-enable', dest='tweet_things',
+                            action='store_true', help='enable tweeting')
+        
+
+        # setup arugment to explicitly disable tweeting
+        self.parser.add_argument('-T', '--tweet-disable', dest='tweet_things',
+                            action='store_false', help='disable tweeting')
+
+        # setup arugment for specifying a list of things to tweet
+        self.parser.add_argument('-v', '--verbose', dest='verbose',
+                            action='store_true', help='enable verbose output')
+        
         # parse the arguments
         self.args = self.parser.parse_args()
 
@@ -69,6 +82,22 @@ class tweet_config():
             return self.args.list
         else:
             return self.config['LIST']['list']
+    
+
+
+    def get_tweet_things(self):
+        if self.args.tweet_things:
+            return self.args.tweet_things
+        else:
+            return self.config['TWEETING']['tweet things']
+    
+
+
+    def get_verbose(self):
+        if self.args.verbose:
+            return self.args.verbose
+        else:
+            return self.config['MISC']['verbose']
 
 
 

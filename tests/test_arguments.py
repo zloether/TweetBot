@@ -60,3 +60,38 @@ def test_argument_list():
     assert tc.args.list == test_list_file
 
 
+
+def test_argument_tweet_things():
+    # set test config file to use
+    test_config_file = '../config/tweet_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config()
+
+    assert tc.args.tweet_things == False
+
+    # try --tweet-enable argument
+    tc.args = tc.parser.parse_args(['--tweet-enable'])
+    
+    assert tc.args.tweet_things == True
+
+    # try --tweet-disable argument
+    tc.args = tc.parser.parse_args(['--tweet-disable'])
+    
+    assert tc.args.tweet_things == False
+
+
+
+def test_argument_verbose():
+    # set test config file to use
+    test_config_file = '../config/tweet_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config(config_file=test_config_file)
+
+    assert tc.args.verbose == False
+
+    # try --verbose argument
+    tc.args = tc.parser.parse_args(['--verbose'])
+    
+    assert tc.args.verbose == True
