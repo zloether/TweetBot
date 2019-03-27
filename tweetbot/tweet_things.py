@@ -13,7 +13,6 @@ import time
 # variables
 # -----------------------------------------------------------------------------
 
-debug = False # print extra logging info
 tweet_things = False # False for testing, True to actually tweet things
 check_status_limit = True
 
@@ -32,22 +31,36 @@ class tweet_things(object):
         self.delay_max = 3600
 
         # set up tweet_config object
-        self.twitter_config = tweet_config()
-
-        # open list of things to tweet file
-        self.list_file = self.twitter_config.get_list_file()
-        print('list_file: ' + str(self.list_file))
-        self.list_of_things_to_tweet = []
-        try:
-            with open(self.list_file) as f:
-                for line in f:
-                    self.list_of_things_to_tweet.append(line.strip())
-        except FileNotFoundError:
-            print(str(self.list_file) + ' not found! Exiting!')
-            exit()
+        self.tweet_config = tweet_config()
 
         # instantiate Twitter Connector Object
-        self.tc = twitter_connector(self.twitter_config)
+        self.tc = twitter_connector(self.tweet_config)
+
+
+    # -------------------------------------------------------------------------
+    # random delay
+    # -------------------------------------------------------------------------
+    def read_list_file(self):
+        list_file = self.tweet_config.get_list_file()
+        print('list_file: ' + str(list_file))
+
+        list_of_things_to_tweet = []
+        try:
+            with open(list_file) as f:
+                for line in f:
+                    list_of_things_to_tweet.append(line.strip())
+        except FileNotFoundError:
+            print(str(list_file) + ' not found! Exiting!')
+            exit()
+        
+        if len(list_of_things_to_tweet) > 0:
+            self.list_of_things_to_tweet = list_of_things_to_tweet
+        else:
+            print('Error: List of things to tweet is empty.')
+            print('List file: ' + str(list_file))
+            print('Exiting!')
+            exit()
+
 
     # -------------------------------------------------------------------------
     # random delay
@@ -66,16 +79,11 @@ class tweet_things(object):
     # -------------------------------------------------------------------------
     def tweet_something(self):
         print('Tweeting something')
-        try:
-            random_value = randint(0, len(self.list_of_things_to_tweet)-1)
-        except ValueError:
-            print('Error: List of things to tweet is empty.')
-            print('List file: ' + str(self.list_file))
-            print('Exiting!')
-            exit()
+        random_value = randint(0, len(self.list_of_things_to_tweet)-1)
+            
         status = self.list_of_things_to_tweet[random_value]
         print('Status: ' + str(status))
-        if tweet_things:
+        if self.tweet_config.get_tweet_things():
             r = self.tc.statuses_update(status)
             print(r)
 

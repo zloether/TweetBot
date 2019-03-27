@@ -27,13 +27,13 @@ def tweet_replies(twitter_connector):
     # -------------------------------------------------------------------------
     # set up tweet_config object
     # -------------------------------------------------------------------------
-    twitter_config = tweet_config()
+    tweet_config = tweet_config()
 
 
     # -------------------------------------------------------------------------
     # open the things to tweet file
     # -------------------------------------------------------------------------
-    list_file = twitter_config.get_list_file()
+    list_file = tweet_config.get_list_file()
     print('list_file: ' + str(list_file))
     list_of_things_to_tweet = []
     try:
@@ -125,10 +125,10 @@ if __name__ == '__main__':
     print('Tweet replies: ' + str(send_replies))
 
     # set up tweet_config object
-    twitter_config = tweet_config()
+    tweet_config = tweet_config()
 
     # create Twitter connector object
-    t = twitter_connector(twitter_config)
+    t = twitter_connector(tweet_config)
     tweet_replies(t)
 
     print('End time: ' + time.strftime("%Y-%m-%d %H:%M:%S"))

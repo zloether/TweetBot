@@ -16,6 +16,20 @@ def test_tweet_things_init():
 
 
 
+def test_read_list_file():
+    # create tweet_things object
+    twt = tweet_things.tweet_things()
+
+    # update list_file
+    twt.tweet_config.args.list = 'tests/test_files/test_list.txt'
+
+    # update list_of_things_to_tweet
+    twt.read_list_file()
+
+    assert len(twt.list_of_things_to_tweet) == 1
+
+
+
 @mock.patch('tweet_things.time')
 def test_random_delay(mocked_time):
     # create tweet_things object
@@ -32,4 +46,28 @@ def test_random_delay(mocked_time):
     mocked_time.sleep.assert_called_with(twt.random_time)
     assert twt.random_time > twt.delay_min
     assert twt.random_time < twt.delay_max
+
+
+
+@mock.patch('tweet_things.twitter_connector.statuses_update')
+def test_tweet_something(mocked_twitter_connector_statuses_update):
+    # create tweet_things object
+    twt = tweet_things.tweet_things()
+
+    # update list_file
+    twt.tweet_config.args.list = 'tests/test_files/test_list.txt'
+
+    # update list_of_things_to_tweet
+    twt.read_list_file()
+
+    # enable tweeting
+    twt.tweet_config.args.tweet_things = True
+
+    # call tweet_something method
+    twt.tweet_something()
+
+    status = 'this is a test message'
+    mocked_twitter_connector_statuses_update.assert_called_with(status)
+
+
 
