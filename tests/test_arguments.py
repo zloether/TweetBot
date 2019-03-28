@@ -38,7 +38,7 @@ def test_argument_config():
     tc = tweet_config.tweet_config()
 
     # set test config file to use
-    test_config_file = 'tests/test_files/test_config.ini'
+    test_config_file = 'test_files/test_config.ini'
     
     # try --config argument
     tc.args = tc.parser.parse_args(['--config', test_config_file])
@@ -47,12 +47,29 @@ def test_argument_config():
 
 
 
+def test_get_api_creds():
+    # set test config file to use
+    test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config(config_file=test_config_file)
+
+    # call method
+    oauth_consumer_key, oauth_consumer_secret, oauth_token, oauth_token_secret = tc.get_api_creds()
+
+    assert oauth_consumer_key == 'test_oauth_consumer_key'
+    assert oauth_consumer_secret == 'test_oauth_consumer_secret'
+    assert oauth_token == 'test_oauth_token'
+    assert oauth_token_secret == 'test_oauth_token_secret'
+
+
+
 def test_argument_list():
     # create tweet_config object
     tc = tweet_config.tweet_config()
 
     # test list file to use
-    test_list_file = 'test/test_files/test_list.txt'
+    test_list_file = 'test_files/test_list.txt'
 
     # try --list argument
     tc.args = tc.parser.parse_args(['--list', test_list_file])
@@ -61,37 +78,53 @@ def test_argument_list():
 
 
 
-def test_argument_tweet_things():
+def test_status_check():
     # set test config file to use
-    test_config_file = '../config/tweet_config.ini'
+    test_config_file = 'config/tweet_config.ini'
 
     # create tweet_config object
-    tc = tweet_config.tweet_config()
+    tc = tweet_config.tweet_config(config_file=test_config_file)
 
-    assert tc.args.tweet_things == False
+    assert tc.get_status_check() == True
+
+    # try --status-disable argument
+    tc.args = tc.parser.parse_args(['--status-disable'])
+    assert tc.get_status_check() == False
+
+    # try --status-enable argument
+    tc.args = tc.parser.parse_args(['--status-enable'])
+    assert tc.get_status_check() == True
+
+
+
+def test_argument_tweet_things():
+    # set test config file to use
+    test_config_file = 'config/tweet_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config(config_file=test_config_file)
+    assert tc.get_tweet_things() == False
 
     # try --tweet-enable argument
     tc.args = tc.parser.parse_args(['--tweet-enable'])
-    
-    assert tc.args.tweet_things == True
+    assert tc.get_tweet_things() == True
 
     # try --tweet-disable argument
     tc.args = tc.parser.parse_args(['--tweet-disable'])
-    
-    assert tc.args.tweet_things == False
+    assert tc.get_tweet_things() == False
 
 
 
 def test_argument_verbose():
     # set test config file to use
-    test_config_file = '../config/tweet_config.ini'
+    test_config_file = 'config/tweet_config.ini'
 
     # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
 
-    assert tc.args.verbose == False
+    assert tc.get_verbose() == False
 
     # try --verbose argument
     tc.args = tc.parser.parse_args(['--verbose'])
     
-    assert tc.args.verbose == True
+    assert tc.get_verbose() == True

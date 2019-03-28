@@ -71,3 +71,13 @@ def test_tweet_something(mocked_twitter_connector_statuses_update):
 
 
 
+@mock.patch('tweet_things.twitter_connector.application_rate_limit_status')
+def test_tweet_something(mocked_twitter_connector_application_rate_limit_status):
+    # create tweet_things object
+    twt = tweet_things.tweet_things()
+
+    # call patched method
+    resources = 'statuses'
+    twt.check_limit(resources)
+
+    mocked_twitter_connector_application_rate_limit_status.assert_called_with(resources)
