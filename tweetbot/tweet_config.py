@@ -32,9 +32,17 @@ class tweet_config():
         
         # give priority to config file passed as arugment
         if self.args.config:
-            self.config.read(self.args.config)
+            config_target = self.args.config
         else:
-            self.config.read(config_file)
+            config_target = config_file
+        
+        if path.isfile(config_target):
+            self.config.read(config_target)
+        else:
+            print('Cannot find config file:')
+            print(config_target)
+            print('Exiting!')
+            exit()
 
 
     
@@ -51,16 +59,23 @@ class tweet_config():
                             action='store', help='specify list of things to tweet')
         
         # setup arugment to explicitly enable tweeting
-        self.parser.add_argument('-t', '--tweet-enable', dest='tweet_things',
-                            action='store_true', help='enable tweeting')
-        
+        self.parser.add_argument('-s', '--status-enable', dest='status_check', default=None,
+                            action='store_true', help='enable checking status limit')
 
         # setup arugment to explicitly disable tweeting
-        self.parser.add_argument('-T', '--tweet-disable', dest='tweet_things',
+        self.parser.add_argument('-S', '--status-disable', dest='status_check', default=None,
+                            action='store_false', help='disable checking status limit')
+
+        # setup arugment to explicitly enable tweeting
+        self.parser.add_argument('-t', '--tweet-enable', dest='tweet_things', default=None,
+                            action='store_true', help='enable tweeting')
+        
+        # setup arugment to explicitly disable tweeting
+        self.parser.add_argument('-T', '--tweet-disable', dest='tweet_things', default=None,
                             action='store_false', help='disable tweeting')
 
         # setup arugment for specifying a list of things to tweet
-        self.parser.add_argument('-v', '--verbose', dest='verbose',
+        self.parser.add_argument('-v', '--verbose', dest='verbose', default=None,
                             action='store_true', help='enable verbose output')
         
         # parse the arguments
@@ -84,24 +99,33 @@ class tweet_config():
             return self.config['LIST']['list']
     
 
+    def get_status_check(self):
+        if not self.args.status_check == None:
+            return self.args.status_check
+        else:
+            return self.config.getboolean('MISC', 'check status')
+
+
 
     def get_tweet_things(self):
-        if self.args.tweet_things:
+        if not self.args.tweet_things == None:
             return self.args.tweet_things
         else:
-            return self.config['TWEETING']['tweet things']
+            return self.config.getboolean('TWEETING', 'tweet things')
     
 
 
     def get_verbose(self):
-        if self.args.verbose:
+        if not self.args.verbose == None:
             return self.args.verbose
         else:
-            return self.config['MISC']['verbose']
+            return self.config.getboolean('MISC', 'verbose')
 
 
 
 
 if __name__ == '__main__':
     tc = tweet_config()
-    tc.get_api_creds()
+    print(tc.get_api_creds())
+    print(tc.get_list_file())
+    print(tc.get_status_check())
