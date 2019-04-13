@@ -16,7 +16,6 @@ import time
 # variables
 # -----------------------------------------------------------------------------
 sleep_delay = 60
-debug = False
 
 # -----------------------------------------------------------------------------
 # twitter_connector
@@ -74,10 +73,10 @@ class twitter_connector():
                 print('Resource: ' + i + ', Limit: ' + limit + ', Remaining: ' + remaining + ', Delay: ' + delay_time + ' seconds')
         else:
             for i in j['resources']:
-                if debug:
+                if self.tweet_config.get_verbose():
                     print(i)
                 for n in j['resources'][i]:
-                    if debug:
+                    if self.tweet_config.get_verbose():
                         print(n)
                     limit = j['resources'][i][n]['limit']
                     remaining = j['resources'][i][n]['remaining']
