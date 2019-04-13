@@ -49,4 +49,6 @@ def test_get_list_file():
     tc.args = tc.parser.parse_args(['--list', test_list_file])
 
     assert tc.get_list_file() == test_list_file
+
+
     
