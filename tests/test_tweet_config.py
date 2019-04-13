@@ -93,3 +93,21 @@ def test_get_tweet_things():
     # try --tweet-enable argument
     tc.args = tc.parser.parse_args(['--tweet-enable'])
     assert tc.get_tweet_things() == True
+
+
+
+def test_get_verbose():
+    # create tweet_config object
+    tc = tweet_config.tweet_config()
+    assert tc.get_verbose() == False
+
+    # try --verbose argument
+    tc.args = tc.parser.parse_args(['--verbose'])
+    assert tc.get_verbose() == True
+
+    # set test config file to use
+    test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config(config_file=test_config_file)
+    assert tc.get_verbose() == False
