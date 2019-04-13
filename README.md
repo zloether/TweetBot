@@ -27,17 +27,18 @@ These instructions will get you a copy of the project up and running on your loc
 You'll need to have Python installed in order to run `tweetbot`. Start by downloading and installing the latest version of [Python 3](https://www.python.org/downloads/).
 > *Note: `tweetbot` has not been tested with Python 2 and will probably not work without changing some things.*
 
-After Python is installed, install the *requests* and *requests_oauthlib* libraries.
-```
-pip install requests requests_oauthlib
-```
-
 ## Installation
 Download the latest version from GitHub using Git.
 ```
 git clone https://github.com/zloether/tweetbot.git
 ```
 This will create a directory called *tweetbot* and all the code will be in it.
+
+Switch to the *tweetbot* directory and install the required packages:
+```
+cd tweetbot
+pip install -r requirements.txt
+```
 
 ## Configuration
 You need a Twitter developer account in order to connect to the API. Get started [here](https://developer.twitter.com/en.html).

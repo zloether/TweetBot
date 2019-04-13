@@ -1,2 +1,7 @@
+certifi
+chardet
+idna
+oauthlib
 requests
-requests_oauthlib
+requests-oauthlib
+urllib3
