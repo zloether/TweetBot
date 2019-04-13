@@ -79,7 +79,7 @@ def test_argument_list():
 
 
 def test_status_check():
-    # set test config file to use
+    # set default config file to use
     test_config_file = 'config/tweet_config.ini'
 
     # create tweet_config object
@@ -98,25 +98,29 @@ def test_status_check():
 
 
 def test_argument_tweet_things():
+    # create tweet_config object
+    tc = tweet_config.tweet_config()
+    assert tc.get_tweet_things() == False
+    
     # set test config file to use
-    test_config_file = 'config/tweet_config.ini'
+    test_config_file = 'tests/test_files/test_config.ini'
 
     # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
-    assert tc.get_tweet_things() == False
-
-    # try --tweet-enable argument
-    tc.args = tc.parser.parse_args(['--tweet-enable'])
     assert tc.get_tweet_things() == True
 
     # try --tweet-disable argument
     tc.args = tc.parser.parse_args(['--tweet-disable'])
     assert tc.get_tweet_things() == False
+    
+    # try --tweet-enable argument
+    tc.args = tc.parser.parse_args(['--tweet-enable'])
+    assert tc.get_tweet_things() == True
 
 
 
 def test_argument_verbose():
-    # set test config file to use
+    # set default config file to use
     test_config_file = 'config/tweet_config.ini'
 
     # create tweet_config object

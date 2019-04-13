@@ -68,6 +68,28 @@ def test_get_status_check():
     tc.args = tc.parser.parse_args(['--status-enable'])
     assert tc.get_status_check() == True
 
-    # try --list argument
+    # try --status-disable argument
     tc.args = tc.parser.parse_args(['--status-disable'])
     assert tc.get_status_check() == False
+
+
+
+def test_get_tweet_things():
+    # create tweet_config object
+    tc = tweet_config.tweet_config()
+    assert tc.get_tweet_things() == False
+
+    # set test config file to use
+    test_config_file = 'tests/test_files/test_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config(config_file=test_config_file)
+    assert tc.get_tweet_things() == True
+
+    # try --tweet-disable argument
+    tc.args = tc.parser.parse_args(['--tweet-disable'])
+    assert tc.get_tweet_things() == False
+
+    # try --tweet-enable argument
+    tc.args = tc.parser.parse_args(['--tweet-enable'])
+    assert tc.get_tweet_things() == True
