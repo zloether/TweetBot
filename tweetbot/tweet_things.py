@@ -25,20 +25,26 @@ check_already_requested = True # for future use
 # tweet things
 # -----------------------------------------------------------------------------
 class tweet_things(object):
-    def __init__(self):
+    def __init__(self, config_file=None):
         self.sleep_delay = False
         self.delay_min = 1800
         self.delay_max = 3600
 
         # set up tweet_config object
-        self.tweet_config = tweet_config()
+        if config_file == None:
+            self.tweet_config = tweet_config()
+        else:
+            self.tweet_config = tweet_config(config_file=config_file)
+
+        # set up list of things to tweet
+        self.read_list_file()
 
         # instantiate Twitter Connector Object
         self.tc = twitter_connector(self.tweet_config)
 
 
     # -------------------------------------------------------------------------
-    # random delay
+    # read list file
     # -------------------------------------------------------------------------
     def read_list_file(self):
         list_file = self.tweet_config.get_list_file()
