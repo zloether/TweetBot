@@ -132,3 +132,19 @@ def test_argument_verbose():
     tc.args = tc.parser.parse_args(['--verbose'])
     
     assert tc.get_verbose() == True
+
+
+
+def test_delay():
+    # set default config file to use
+    test_config_file = 'config/tweet_config.ini'
+
+    # create tweet_config object
+    tc = tweet_config.tweet_config(config_file=test_config_file)
+
+    assert tc.get_delay() == 60
+
+    # try --delay argument
+    tc.args = tc.parser.parse_args(['--delay', '25'])
+    
+    assert tc.get_delay() == 25
