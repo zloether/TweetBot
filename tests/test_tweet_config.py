@@ -111,3 +111,15 @@ def test_get_verbose():
     # create tweet_config object
     tc = tweet_config.tweet_config(config_file=test_config_file)
     assert tc.get_verbose() == False
+
+
+
+def test_get_delay():
+    # create tweet_config object
+    tc = tweet_config.tweet_config()
+    assert tc.get_delay() == 60
+
+    # try --delay argument
+    tc.args = tc.parser.parse_args(['--delay', '25'])
+    assert tc.get_delay() == 25
+

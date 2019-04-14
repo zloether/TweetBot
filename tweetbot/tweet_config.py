@@ -54,6 +54,10 @@ class tweet_config():
         self.parser.add_argument('-c', '--config', dest='config', metavar='file',
                             action='store', help='specify config file to use')
         
+        # setup arugment for specifying sleep delay
+        self.parser.add_argument('-d', '--delay', dest='delay', metavar='seconds',
+                            action='store', type=int, help='specify sleep delay')
+        
         # setup arugment for specifying a list of things to tweet
         self.parser.add_argument('-l', '--list', dest='list', metavar='file',
                             action='store', help='specify list of things to tweet')
@@ -120,6 +124,14 @@ class tweet_config():
             return self.args.verbose
         else:
             return self.config.getboolean('MISC', 'verbose')
+    
+
+
+    def get_delay(self):
+        if not self.args.delay == None:
+            return self.args.delay
+        else:
+            return self.config.getint('MISC', 'sleep delay')
 
 
 
