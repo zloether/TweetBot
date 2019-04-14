@@ -15,7 +15,7 @@ import time
 # -----------------------------------------------------------------------------
 # variables
 # -----------------------------------------------------------------------------
-sleep_delay = 60
+#sleep_delay = 60
 
 # -----------------------------------------------------------------------------
 # twitter_connector
@@ -29,7 +29,7 @@ class twitter_connector():
                                     resource_owner_key=api_cred[2], \
                                     resource_owner_secret=api_cred[3])
         self.request_counter = []
-        self.sleep_delay = sleep_delay
+        self.sleep_delay = self.tweet_config.get_delay()
         self.last_call = None
 
     # percent encode input string for web requests
