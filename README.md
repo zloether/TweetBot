@@ -1,6 +1,6 @@
 # TweetBot
 [![Python](https://img.shields.io/badge/python-v3.4+-blue.svg)](https://www.python.org/)
-[![Build Status](https://travis-ci.org/zloether/tweetbot.svg?branch=master)](https://travis-ci.org/zloether/tweetbot)
+[![Build Status](https://travis-ci.org/zloether/TweetBot.svg?branch=master)](https://travis-ci.org/zloether/TweetBot)
 [![Issues](https://img.shields.io/github/issues/zloether/tweetbot.svg)](https://github.com/zloether/tweetbot/issues)
 [![License](https://img.shields.io/github/license/zloether/tweetbot.svg)](https://opensource.org/licenses/MIT)
 
